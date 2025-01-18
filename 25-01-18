@@ -1,0 +1,6 @@
+x = list(range(5, -10, -2))
+print(x)
+y = tuple(range(20, 0, -1))
+print(y)
+korean, english, mathematics, science = map(int, input().split())
+print(korean >= 90 and english > 80 and mathematics > 85 and science >= 80)
