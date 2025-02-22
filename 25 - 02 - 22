@@ -1,0 +1,55 @@
+# a = int(input())
+# if a >= 10:
+#     print(10)
+
+# if a < 10:
+#     print(a + 10)
+
+# import random
+
+# a= int(input())
+# b= random.randrange(1, 100)
+# if a == b:
+#     print('맞았습니다!')
+# if a != b:
+#     print('틀렸습니다!')
+# print('당신의 값:', a)
+# print('결정된 값:', b)
+
+# x = 5
+# if x != 10:
+#     print('ok')
+
+# written_test = 75
+# coding_test = True
+# if written_test >= 80 and coding_test:
+#     print('합격')
+# else:
+#     print('불합격')
+
+# x = int(input())
+# if x % 2 == 1:
+#     print('홀수')
+# elif x == 0:
+#     print('0 입니다')
+# else:
+#     print('짝수')
+
+# ice = {'메로나': 1000, '폴라포': 1200, '빵빠레': 1800}
+# ice['죠스바'] = 1200
+# ice['월드콘'] = 1500
+# ice['메로나'] = 1300
+# del ice['메로나']
+# ice.pop('폴라포')
+# print(ice)
+
+# inventory = {'메로나': [300, 20], '비비빅': [400, 3], '죠스바': [250, 100]}
+# inventory['월드콘'] = [500, 7]
+# print(inventory)
+# print(inventory['비비빅'][1])
+# print(inventory.keys())
+# print(inventory.values())
+# print(inventory.values())
+# ice = {'탱크보이': 1400, '뽕따':1300, '쌍쌍바': 1000}
+# a = list(ice.values())
+# print(sum(a))
