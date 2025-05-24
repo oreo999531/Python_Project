@@ -1,0 +1,50 @@
+# import random
+# d = {'빠': '묵', '묵': '찌', '찌': '빠'}
+# draw = None
+# last_win = None
+
+# while True:
+#     a = random.choice(list(d.keys()))
+#     b = random.choice(list(d.keys()))
+#     print(f'a:{a}, b:{b}')
+#     if d[a] == b:
+#         print('a 승리!')
+#         break
+#     elif a == b:
+#         print('무승부')
+#     else:
+#         print('b 승리!')
+
+# while not last_win or not draw:
+#     a = random.choice(list(d.keys()))
+#     b = random.choice(list(d.keys()))
+#     if d[a] == b:
+#         last_win = 'A'
+#         draw = False
+#
+#     elif a == b:
+#         draw = True
+#     else:
+#         last_win = 'B'
+#         draw = False
+#     print(f'a:{a}, b:{b}')
+# print(f'승자{last_win}!')
+
+# N = int(input())
+# a = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+# b = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L']
+#
+# N -= 4
+# x = N % len(a)
+# y = N % len(b)
+#
+# print(b[y]+str(a[x]))
+
+# 디버깅 (debugging)
+# 디버그 (debug): 오류가 나게 하는 원인을 제거
+# 버그 (bug)
+
+# a, b, c, d = map(int,input().split())
+
+
+# [].count(n) # 리스트에 n이 몇개 있는지 나옴
