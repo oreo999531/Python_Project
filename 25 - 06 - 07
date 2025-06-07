@@ -1,0 +1,8 @@
+T = int(input())
+for i in range(T):
+    n, s = input().split()
+    n = int(n)
+    a = ''
+    for N in s:
+        a += N * n
+    print(a)
