@@ -1,0 +1,69 @@
+# print(list(zip([1, 2, 3], [123, 123, 123])))
+# icescream = {'메로나': 1000, '폴라포': 1200, '빵빠레': 1800}
+# icescream['죠스바'] = 1200
+# icescream['월드콘'] = 1500
+# icescream['메로나'] = 1300
+# del icescream['메로나']
+# print(icescream)
+# items: 키-값 쌍을 모두 가져옴 @ x.items()
+# keys: 키를 모두 가져옴 @ x.keys()
+# values: 값을 모두 가져옴 @ x.values()
+
+# N = int(input())
+# cards = list(map(int, input().split()))
+# M = int(input())
+# check = list(map(int, input().split()))
+#
+# card_dict = {}
+# for s in cards:
+#     card_dict[s] = 1
+#
+# for i in check:
+#     if i in card_dict:
+#         print(1, end=' ')
+#     else:
+#         print(0, end=' ')
+
+# n = int(input())
+# log = {}
+#
+# for _ in range(n):
+#     name, action = map(input().split())
+#     if action == "enter":
+#         log[name] = True
+#     else:
+#         log[name] = False
+#
+# In = []
+# for name, in_office in log.items():
+#     if in_office:
+#         In.append(name)
+#
+# In.sort(reverse=True)
+#
+# for name in In:
+#     print(name)
+
+# a, b = input().split()
+# a = list(a)
+# b = list(b)
+# a.reverse()
+# b.reverse()
+# a = int(''.join(a))
+# b = int(''.join(b))
+# print(max(a, b))
+# 쉽게
+# a, b = input().split()
+# print(max(int(a[::-1]),int(b[::-1])))
+
+# set() # 집합
+# a = {1, 2, 3, 4, 5}
+# b = {5, 6, 7, 8, 9}
+# print(a | b) # 합집합
+# print(a & b) # 교집합
+# print(a - b) # 차집합
+# print(b - a)
+# import random
+# a = [random.randint(1, 100) for _ in range(100)]
+# a = list(set(a))
+# print(a)
