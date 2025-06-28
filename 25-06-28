@@ -1,0 +1,110 @@
+# def hello():
+#     print('Hello, World')
+#
+# hello()
+
+# def add(a, b):
+#     print(a + b)
+#
+# add(10, 20)
+
+# def add(a, b):
+#     print(a + b)
+#     return a - b
+#
+# print(add(10, 20))
+
+# def add():
+#     return 1
+#
+# x = add()
+# print(x)
+
+# def not_ten(a):
+#     if a == 10:
+#         return
+#     print(a, '입니다', sep='')
+#
+# not_ten(10)
+# not_ten(5)
+
+# def add_sub(a, b):
+#     return a + b, a - b
+#
+# x, y = add_sub(10, 20)
+# print(x, y)
+
+# def print_with_smile(a):
+#     return a + ':D'
+#
+# print(print_with_smile('안녕하세요'))
+
+# def print_numbers(a, b, c):
+#     print(a)
+#     print(b)
+#     print(c)
+#
+# print_numbers(10, 20, 30)
+
+# x = [10, 20, 30]
+# print(*x)
+
+# def print_numbers(*args):
+#     for arg in args:
+#         print(arg)
+#
+# print_numbers(10, 20, 30)
+# l = [10, 20, 30]
+# print_numbers(*l)
+
+# def personal_info(name, age, address):
+#     print('이름:' + name)
+#     print('나이:' + age)
+#     print('주소:' + address)
+#
+# personal_info(name='별이', age='10', address='부천시')
+
+# # 조건문: 조건 코드를 실행할지 실행하지 않을지
+# # 반복문: 코드 블럭을 여러번 실행하고 싶을때
+# # 함수: 기능을 처리하는 가장 작은 코드 블럭의 단위
+# def add(a, b):
+#     print(a+b)
+#
+# 기능을 처리하는 가장 작은 코드 블럭의 단위
+#
+# # def: define 정의하다, 매개+변수
+# print(add(1, 2))
+
+# return 값은 항상 한개이다
+# def f():
+#     return 0, 1 # (0, 1)
+#
+# print(f())
+
+# def f():
+#     return 0, # (0,) return 0은 그냥 0
+#
+# a = f()
+# print(a)
+
+# a, b = 2, 1
+# def f(a, b): # 얘네는 이거 실행하고 사라짐
+#     a = 1
+#     b = 2
+#
+# f(a, b)
+# print(a, b) # 2, 1
+
+# *(가변): 여러개 들어감
+# def f(*c):
+#     print(*c)
+#
+# f(*[10, 20, 30])
+
+# def solution(a, b):
+#     num1 = int(str(a)+str(b))
+#     num2 = 2 * a * b
+#     return max(num1, num2)
+# 
+# print(solution(2, 91)) #364
+# print(solution(91, 2)) #912
