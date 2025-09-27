@@ -1,0 +1,59 @@
+# arr = [[j for i in range(4)]for j in range(5)]
+# N,M = map(int, input().split())
+# A, B = [], []
+# for i in range(N):
+#     a = list(map(int, input().split()))
+#     A.append(a)
+#
+# for i in range(N):
+#     b = list(map(int, input().split()))
+#     B.append(b)
+#
+# for i in range(N):
+#     for j in range(M):
+#         print(A[i][j] + B[i][j], end=' ')
+#
+#     print()
+
+# A = []
+# m = 0
+# for i in range(9):
+#     a = list(map(int, input().split()))
+#     A.append(a)
+#
+# for i in range(9):
+#     for j in range(9):
+#         if m < A[i][j]:
+#             m = A[i][j]
+#
+# print(m)
+#
+# for i in range(9):
+#     for j in range(9):
+#         if m == A[i][j]:
+#             print(i+1,j+1)
+
+
+# a, b = input().split()
+# b = int(b)
+# result = (int(a, b))
+#
+# print(result)
+
+# 계산기
+def cal(a, x, y):
+    if a == '+':
+        return x + y
+    if a == '-':
+        return x - y
+    if a == '*':
+        return x * y
+    if a == '/':
+        return x / y
+
+
+a, x, y = map(str,input().split())
+x = int(x)
+y = int(y)
+print(cal(a, x, y))
+
