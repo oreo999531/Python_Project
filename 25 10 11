@@ -1,0 +1,37 @@
+# temp = []
+# for i in range(100):
+#     temp2 = []
+#     for u in range(100):
+#         temp2.append('')
+#     temp.append(temp2)
+# n = int(input())
+#
+# for _ in range(n):
+#     x, y = map(int, input().split())
+#     for i in range(x, x+10):
+#         for j in range(y, y+10):
+#             temp[i][j] = 1
+#
+# area = 0
+# for i in range(100):
+#     for j in range(100):
+#         if temp[i][j] == 1:
+#             area += 1
+#
+# print(area)
+
+N = int(input())
+all = [input() for _ in range(N)]
+
+K = int(input())
+my_jobs = [input() for _ in range(K)]
+
+new_jobs = []
+
+for job in all:
+    if job not in my_jobs:
+        new_jobs.append(job)
+
+print(len(new_jobs))
+for job in new_jobs:
+    print(job, end='')
