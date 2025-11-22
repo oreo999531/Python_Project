@@ -1,0 +1,74 @@
+# a = int(input())
+# for i in range(a):
+#     b = input().strip()
+#     cnt = 0
+#     total = 0
+#     for ch in b:
+#         if ch == 'O':
+#             cnt += 1
+#             total += cnt
+#         else:
+#             cnt = 0
+#     print(total)
+
+# arr = []
+# for _ in range(10):
+#     n = int(input())
+#     arr.append(n % 42)
+# cnt = 0
+# for i in range(10):
+#     if arr[i] not in arr[:i]:
+#         cnt += 1
+# print(cnt)
+
+# N, X = map(int, input().split())
+# A = list(map(int, input().split()))
+#
+# for num in A:
+#     if num < X:
+#         print(num, end=' ')
+
+# while True:
+#     try:
+#         A, B = map(int, input().split())
+#         print(A + B)
+#     except EOFError:
+#         break
+
+# T = int(input())
+#
+# for _ in range(T):
+#     H, W, N = map(int, input().split())
+#
+#     floor = N % H
+#     if floor == 0:
+#         floor = H
+#
+#     room_number = (N - 1) // H + 1
+#
+#     if room_number < 10:
+#         room = floor * 100 + room_number
+#     else:
+#         room = floor * 100 + room_number
+#
+#     print(room)
+
+# N = int(input())
+# numbers = list(map(int, input().split()))
+#
+# print(min(numbers), max(numbers))
+
+A = int(input())
+B = int(input())
+C = int(input())
+
+product = A * B * C
+count = [0] * 10
+
+while product > 0:
+    digit = product % 10
+    count[digit] += 1
+    product //= 10
+
+for i in range(10):
+    print(count[i])
