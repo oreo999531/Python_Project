@@ -1,0 +1,65 @@
+# class Complex:
+#     r = 1
+#     i = 0
+#     def __init__(self, real, imagine):
+#         Complex.r = real
+#         self.i  = imagine
+#
+# x = Complex(3.0, -4.5)
+# print(x.r, x.i)
+# y = Complex(1.2, 3.3)
+# print(y.r, y.i, x.r, x.i)
+
+# class Cls:
+#     def __init__(self, a, b):
+#         Cls.a = a
+#         self.b = b
+#
+# fst = Cls(1, 2)
+# # fst.a = 5 # 5로 변경한 그 순간부터 Cls.a와 연관이 없어진다.
+# sec = Cls(3, 4)
+# trd = Cls(5, 6)
+#
+# fst.a = 0
+# Cls.a = 9
+#
+# trd.b = fst.b
+# fst.b = 5
+# print(fst.a, fst.b)
+# print(sec.a, sec.b)
+# print(trd.a, trd.b)
+
+class Person:
+    population = 0
+    CURRENT_YEAR = 2025
+
+    def __init__(self, name, ssn, address):
+        self.name = name
+        self.ssn = ssn
+        self.address = address
+        Person.population += 1
+
+    def get_name(self): return self.name
+    def set_name(self, name): self.name = name
+
+    def get_address(self): return self.address
+    def set_address(self, address): self.address = address
+
+    def get_gender(self):
+        return "남성" if int(self.ssn[7]) % 2 else "여성"
+
+    def get_age(self):
+        if int(self.ssn[7]) < 3:
+            return 2026 - (1900 + int(self.ssn[0:2]))
+        else:
+            return 2026 - (2000 + int(self.ssn[0:2]))\
+
+    def get_pop(self):
+        return Person.population
+
+p1 = Person('홍길동', '100531-3123456', '부천')
+print(p1.get_name())
+print(p1.get_gender())
+print(p1.get_age())
+print(p1.get_address())
+print(p1.get_pop())
