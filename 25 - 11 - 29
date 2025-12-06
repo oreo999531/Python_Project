@@ -1,0 +1,27 @@
+class 붕어빵:
+    속재료 =  '팥'
+
+빵1 = 붕어빵()
+빵2 = 붕어빵()
+
+붕어빵.속재료 = '피자'
+빵2.속재료 = '슈크림'
+빵1.모양 = '미니'
+
+print(빵1.속재료, 빵1.모양)
+print(빵2.속재료)
+
+class animal:
+    sound = '.'
+
+cat = animal()
+bird = animal()
+dog = animal()
+
+cat.sound = '야옹'
+bird.sound = '짹'
+dog.sound = '멍'
+
+print(cat.sound)
+print(dog.sound)
+print(bird.sound)
