@@ -1,0 +1,43 @@
+# numeronym
+def numeronym(w: str) -> str:
+    if len(w) < 4:
+        return w
+    return w[0] + str(len(w) - 2) + w[-1]
+
+# template
+def template(w: str) -> str:
+    result = ""
+    num = ""
+
+    for c in w:
+        if c.isdigit():
+            num += c
+        else:
+            if num != "":
+                result += "." * int(num)
+                num = ""
+            result += c
+
+    if num != "":
+        result += "." * int(num)
+
+    return result
+
+# isnumeronym
+def isnumeronym(n: str, w: str) -> bool:
+    nt = template(n)
+
+    if len(nt) != len(w):
+        return False
+
+    for i in range(len(w)):
+        if nt[i] == ".":
+            continue
+        if nt[i].lower() != w[i].lower():
+            return False
+
+    return True
+
+numeronym("internationalization")
+template("R2D2")
+print(isnumeronym("i18n", "internationalization"))
