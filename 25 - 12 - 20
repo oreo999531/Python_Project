@@ -1,0 +1,50 @@
+# s = '12345'
+# for i in range(1, len(s) + 1):
+#     current = int(s[:i])
+#     print(i)
+#     print(current)
+# print(current)
+
+# longest_polydivisible_prefix
+def longest_polydivisible_prefix(n):
+    s = str(n)
+    prefix = ""
+
+    for i in range(1, len(s) + 1):
+        current = int(s[:i])
+        if current % i == 0:
+            prefix = s[:i]
+        else:
+            break
+
+    return int(prefix)
+
+# ispolydivisible
+def ispolydivisible(n):
+    s = str(n)
+
+    if s[0] == '0':
+        return False
+
+    for i in range(1, len(s) + 1):
+        if int(s[:i]) % i != 0:
+            return False
+
+    return True
+
+# polydivisible_extensions(fail)
+# (고치기)
+def polydivisible_extensions(n):
+    count = 0
+
+    for d in range(10):
+        new_number = n * 10 + d
+
+        if new_number % (len(str(n)) + 1) == 0:
+            count += 1
+
+    return count
+
+print(longest_polydivisible_prefix(1234356789))
+print(ispolydivisible(345654))
+print(polydivisible_extensions(12))
