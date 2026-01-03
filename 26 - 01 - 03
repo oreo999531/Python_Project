@@ -1,0 +1,40 @@
+def same_multiset(x, y, n):
+    return sorted(str(x) + str(y)) == sorted(str(n))
+
+def fangs(n):
+    s = str(n)
+    leng = len(s)
+    d = leng // 2
+    res = []
+
+    lo = 10 ** (d - 1)
+    hi = 10 ** d - 1
+    for x in range(lo, hi + 1):
+        if n % x != 0:
+            continue
+        y = n // x
+
+        if y > hi or y < lo:
+            continue
+
+        if x > y:
+            continue
+
+        if same_multiset(x, y, n):
+            res.append((x, y))
+
+    return res
+
+
+def isvampire(n):
+    return len(fangs(n)) > 0
+
+print(fangs(1260))
+print(fangs(1296))
+print(fangs(1009))
+print(same_multiset(21,60,1260))
+print(same_multiset(18,72,1296))
+print(same_multiset(80, 86, 6880))
+print(isvampire(1260))
+print(isvampire(1296))
+print(isvampire(6880))
