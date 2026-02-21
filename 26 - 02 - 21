@@ -1,0 +1,251 @@
+# import random
+#
+# import pygame
+# import sys
+# import random
+# from pygame.examples.moveit import HEIGHT
+#
+# pygame.init()
+# WIDTH, HEIGHT = 800, 600
+# screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# pygame.display.set_caption("ball game")
+#
+# color = {'WHITE': (255, 255, 255), 'BLUE': (0, 0, 255)}
+#
+#
+#
+# ball_radius = 14
+# balls = []
+#
+# def spawn_ball():
+#     x = random.randint(ball_radius, WIDTH - ball_radius)
+#     y = random.randint(ball_radius, HEIGHT - ball_radius)
+#
+#     vx = random.choice([-1, 1]) * random.randint(3, 7)
+#     vy = random.choice([-1, 1]) * random.randint(3, 7)
+#
+#     balls.append({"x": x, "y": y, "vx": vx, "vy": vy})
+#
+# def reset_game():
+#     balls.clear()
+#     for i in range(3):
+#         spawn_ball()
+#
+#
+# ball_x, ball_y = WIDTH // 2, HEIGHT // 2
+# speed_x, speed_y = 5, 4
+#
+# running = True
+# clock = pygame.time.Clock()
+# while running:
+#     clock.tick(60)
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#
+#
+#     for b in balls:
+#         b["x"] += b["vx"]
+#         b["y"] += b["vy"]
+#
+#         if b['x'] - ball_radius <= 0 or b['x'] + ball_radius >= WIDTH:
+#             b['vx'] *= -1
+#         if b['y'] - ball_radius <= 0 or b['y'] + ball_radius >= HEIGHT:
+#             b['vy'] *= -1
+#
+#
+#     screen.fill(color['WHITE'])
+#     for b in balls:
+#         pygame.draw.circle(screen, color['BLUE'], (int(b["x"], int(b["y"])), ball_radius)
+#
+#     pygame.draw.circle(screen, color['RED']), (mx, my), player_radius)
+#     pygame.display.flip()
+#
+#
+#
+#
+# pygame.quit()
+# sys.exit()
+
+import pygame
+import sys
+import random
+import math
+
+pygame.init()
+
+# 화면
+WIDTH, HEIGHT = 800, 600
+screen = pygame.display.set_mode((WIDTH, HEIGHT))
+pygame.display.set_caption("Dodge the Balls (Mouse)")
+clock = pygame.time.Clock()
+
+# 색
+color = {'WHITE': (255, 255, 255), 'BLACK': (0, 0, 0), 'RED':(255, 0, 0), 'BLUE':(0, 0, 255), 'GRAY': (120, 120, 120)}
+
+
+# 폰트
+font = pygame.font.SysFont(None, 36)
+small_font = pygame.font.SysFont(None, 24)
+
+# 플레이어(마우스 따라가는 원)
+player_radius = 14
+
+# 공(적) 설정
+ball_radius = 14
+balls = []
+
+def spawn_ball():
+    # 랜덤 위치 + 랜덤 속도 (0은 피함)
+    x = random.randint(ball_radius, WIDTH - ball_radius)
+    y = random.randint(ball_radius, HEIGHT - ball_radius)
+
+    vx = random.choice([-1, 1]) * random.randint(3, 7)
+    vy = random.choice([-1, 1]) * random.randint(3, 7)
+
+    balls.append({"x": x, "y": y, "vx": vx, "vy": vy})
+
+def reset_game():
+    balls.clear()
+    for _ in range(3):  # 시작 공 3개
+        spawn_ball()
+# 충돌 판정(원-원)
+def circle_hit(x1, y1, r1, x2, y2, r2):
+    dx = x1 - x2
+    dy = y1 - y2
+    return (dx * dx + dy * dy) <= (r1 + r2) * (r1 + r2)
+
+reset_game()
+
+game_over = False
+start_ticks = pygame.time.get_ticks()
+
+# 난이도: 몇 초마다 공 추가
+SPAWN_EVERY_SEC = 4
+max_balls = 30
+
+while True:
+    dt = clock.tick(60) / 1000.0  # 초 단위(나중 확장용)
+
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            pygame.quit()
+            sys.exit()
+
+        if event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_r:
+                game_over = False
+                start_ticks = pygame.time.get_ticks()
+                reset_game()
+
+    # 플레이어 위치: 마우스
+    mx, my = pygame.mouse.get_pos()
+
+    # 경과 시간(초)
+    elapsed_sec = (pygame.time.get_ticks() - start_ticks) // 1000
+
+    if not game_over:
+        # 시간 지나면 공 추가
+        if elapsed_sec > 0 and elapsed_sec % SPAWN_EVERY_SEC == 0:
+            # 같은 초에 여러 번 추가되는 걸 막기 위해, “그 초에 이미 추가했는지” 체크
+            # 간단하게: 그 순간 프레임에서만 추가되도록 조건 강화
+            # (tick 기준으로 한 번만 걸리게)
+            if len(balls) < max_balls:
+                # 0.1초 이내 구간에서만 스폰하도록 제한
+                if (pygame.time.get_ticks() - start_ticks) % 1000 < 20:
+                    spawn_ball()
+
+        # 공 이동 + 벽 튕김
+        for b in balls:
+            b["x"] += b["vx"]
+            b["y"] += b["vy"]
+
+            if b["x"] - ball_radius <= 0 or b["x"] + ball_radius >= WIDTH:
+                b["vx"] *= -1
+            if b["y"] - ball_radius <= 0 or b["y"] + ball_radius >= HEIGHT:
+                b["vy"] *= -1
+
+            # 플레이어와 충돌하면 게임 오버
+            if circle_hit(mx, my, player_radius, b["x"], b["y"], ball_radius):
+                game_over = True
+
+    # 그리기
+    screen.fill(color['WHITE'])
+
+    # 공들
+    for b in balls:
+        pygame.draw.circle(screen, color['BLUE'], (int(b["x"]), int(b["y"])), ball_radius)
+
+    # 플레이어
+    pygame.draw.circle(screen, color['RED'], (mx, my), player_radius)
+
+    # UI
+    info = font.render(f"Time: {elapsed_sec}s   Balls: {len(balls)}", True, color['BLACK'])
+    screen.blit(info, (20, 15))
+
+    guide = small_font.render("Press R to Restart", True, color['GRAY'])
+    screen.blit(guide, (20, 55))
+
+    if game_over:
+        msg = font.render("GAME OVER", True, color['BLACK'])
+        screen.blit(msg, (WIDTH // 2 - msg.get_width() // 2, HEIGHT // 2 - 40))
+
+        msg2 = small_font.render("Press R to restart", True, color['BLACK'])
+        screen.blit(msg2, (WIDTH // 2 - msg2.get_width() // 2, HEIGHT // 2 + 10))
+
+    pygame.display.flip()
+# import pygame
+# import sys
+# import random
+#
+# pygame.init()
+# WIDTH, HEIGHT = 800, 600
+# screen = pygame.display.set_mode((WIDTH, HEIGHT))
+# pygame.display.set_caption("ball game")
+#
+# color = {'WHITE': (255, 255, 255), 'BLUE': (0, 0, 255)}
+#
+# ball_radius = 20
+#
+# # 공 10개 생성 (x, y, speed_x, speed_y)
+# balls = []
+# for _ in range(10):
+#     ball = {
+#         'x': random.randint(ball_radius, WIDTH - ball_radius),
+#         'y': random.randint(ball_radius, HEIGHT - ball_radius),
+#         'speed_x': random.choice([-5, -4, -3, 3, 4, 5]),
+#         'speed_y': random.choice([-5, -4, -3, 3, 4, 5])
+#     }
+#     balls.append(ball)
+#
+# running = True
+# clock = pygame.time.Clock()
+#
+# while running:
+#     clock.tick(60)
+#
+#     for event in pygame.event.get():
+#         if event.type == pygame.QUIT:
+#             running = False
+#
+#     # 모든 공 업데이트
+#     for ball in balls:
+#         ball['x'] += ball['speed_x']
+#         ball['y'] += ball['speed_y']
+#
+#         # 벽 충돌 처리
+#         if ball['x'] - ball_radius <= 0 or ball['x'] + ball_radius >= WIDTH:
+#             ball['speed_x'] *= -1
+#         if ball['y'] - ball_radius <= 0 or ball['y'] + ball_radius >= HEIGHT:
+#             ball['speed_y'] *= -1
+#
+#     screen.fill(color['WHITE'])
+#
+#     # 모든 공 그리기
+#     for ball in balls:
+#         pygame.draw.circle(screen, color['BLUE'], (ball['x'], ball['y']), ball_radius)
+#
+#     pygame.display.flip()
+#
+# pygame.quit()
+# sys.exit()
