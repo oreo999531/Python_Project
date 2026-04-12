@@ -1,0 +1,48 @@
+import string
+
+def calculate_strength(password):
+    charset = 0
+
+    # 문자
+    if any(c.islower() for c in password):
+        charset += 26
+    if any(c.isupper() for c in password):
+        charset += 26
+    if any(c.isdigit() for c in password):
+        charset += 10
+    if any(c in string.punctuation for c in password):
+        charset += len(string.punctuation)
+
+    length = len(password)
+
+    # 경우의 수
+    cases = charset ** length if charset > 0 else 0
+
+    # 강도
+    if cases < 1e6:
+        strength = "약함"
+    elif cases < 1e12:
+        strength = "보통"
+    elif cases < 1e18:
+        strength = "강함"
+    else:
+        strength = "매우 강함"
+
+    # 길이 경고
+    if length < 8:
+        warning = "너무 짧은 비밀번호입니다! (8자 이상 권장)"
+    elif length < 12:
+        warning = "보안을 위해 12자 이상 사용하는 것이 좋습니다."
+    else:
+        warning = "길이 적절"
+
+    return cases, strength, warning
+
+
+
+password = input("비밀번호 입력: ")
+cases, strength, warning = calculate_strength(password)
+
+print(f"가능한 경우의 수: {cases}")
+print(f"보안 강도: {strength}")
+print(f"{warning}")
