@@ -1,0 +1,20 @@
+# import cmath
+# a, b, c = map(int, input().split())
+# def formula(a, b, c):
+#     p = (b**2) - (4 * a * c)
+#     p2 = cmath.sqrt(p)
+#     x1 = (b * -1 + p2) / (2 * a)
+#     x2 = (b * -1 - p2) / (2 * a)
+#     return x1.real, x2.real
+# print(formula(a, b, c))
+
+a, b, c = map(int, input().split())
+
+def bank(a, b, c):
+    for i in range(c):
+        a += (a * (b / 100))
+
+    return  a
+
+
+print(bank(a, b, c))
